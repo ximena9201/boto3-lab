@@ -30,7 +30,7 @@ jobs:
           --count 1 \
           --instance-type ${{ github.event.inputs.instance_type}} \
           --key-name xime-test \
-          --user-data file://.github/workflows/user-data.sh \
+          --user-data file://user-data.sh \
           --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=test}]"
 
       #   with:
