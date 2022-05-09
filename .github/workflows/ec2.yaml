@@ -9,9 +9,10 @@ on:
       instance_type:
         type: string
         description: Instance Type
-  push:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
+
 jobs:
   RunDemo:
     runs-on: ubuntu-latest
@@ -21,8 +22,9 @@ jobs:
       AWS_DEFAULT_REGION: "us-east-1"
 
 
-
     steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
       - name: Start AWS EC2
         run: |
           aws ec2 run-instances \
