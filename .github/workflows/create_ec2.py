@@ -4,7 +4,7 @@ import boto3
 
 AWS_REGION = "us-east-1"
 EC2_RESOURCE = boto3.resource('ec2', region_name=AWS_REGION)
-KEY_PAIR_NAME = 'test'
+KEY_PAIR_NAME = 'xime-test'
 AMI_ID = 'ami-0c02fb55956c7d316'
 
 
