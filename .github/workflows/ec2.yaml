@@ -6,6 +6,9 @@ on:
       image_id:
         type: string
         description: AMI-ID
+      instance_type:
+        type: string
+        description: instance-type
   push:
     branches:
       - master
@@ -25,7 +28,7 @@ jobs:
           aws ec2 run-instances \
           --image-id ${{ github.event.inputs.image_id }} \
           --count 1 \
-          --instance-type t2.micro \
+          --instance-type ${{ github.event.inputs.instance_type}}\
           --key-name xime-test \
           --user-data ./user-data.sh \
           --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=test}]"
