@@ -7,6 +7,8 @@ EC2_RESOURCE = boto3.resource('ec2', region_name=AWS_REGION)
 KEY_PAIR_NAME = 'test'
 AMI_ID = 'ami-0c02fb55956c7d316'
 
+
+
 # User data
 user_data = """#!/bin/bash
 #!/bin/bash
