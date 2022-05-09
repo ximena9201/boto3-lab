@@ -1,5 +1,11 @@
+name: Workflow
+
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      image_id:
+        type: string
+        description: AMI-ID
   push:
     branches:
       - master
@@ -17,7 +23,7 @@ jobs:
       - name: Start AWS EC2
         run: |
           aws ec2 run-instances \
-          --image-id ami-0c02fb55956c7d316 \
+          --image-id ${{ github.event.inputs.image_id }} \
           --count 1 \
           --instance-type t2.micro \
           --key-name xime-test \
