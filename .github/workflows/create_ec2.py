@@ -7,10 +7,8 @@ EC2_RESOURCE = boto3.resource('ec2', region_name=AWS_REGION)
 KEY_PAIR_NAME = 'xime-test'
 AMI_ID = 'ami-0c02fb55956c7d316'
 
-
-
 # User data
-user_data = """#!/bin/bash
+USER_DATA = """#!/bin/bash
 DOMAIN=sb.anacondaconnect.com
 LOCAL_IP=$(/usr/bin/curl -s  http://169.254.169.254/latest/meta-data/local-ipv4 | cut -d = -f 2)
 
@@ -30,6 +28,7 @@ instances = EC2_RESOURCE.create_instances(
     ImageId=AMI_ID,
     InstanceType='t2.micro',
     KeyName=KEY_PAIR_NAME,
+    UserData=USER_DATA,
     TagSpecifications=[
         {
             'ResourceType': 'instance',
