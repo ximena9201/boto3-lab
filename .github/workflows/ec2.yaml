@@ -1,0 +1,26 @@
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+jobs:
+  RunDemo:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3
+      - name: install
+        run: |
+          pip install boto3
+      - name: run
+        run: |
+          python .github/workflows/create_ec2.py
