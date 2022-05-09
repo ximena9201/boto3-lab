@@ -12,15 +12,24 @@ jobs:
 
 
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: master
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3
-      - name: install
+      - name: Start AWS EC2
         run: |
-          pip install boto3
-      - name: run
-        run: |
-          python .github/workflows/create_ec2.py
+          aws ec2 run-instances \
+          --image-id ami-0c02fb55956c7d316 \
+          --count 1 \
+          --instance-type t2.micro \
+          --key-name xime-test \
+          --user-data ./user-data.sh \
+          --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=test}]"
+
+      #   with:
+      #     ref: master
+      # - uses: actions/setup-python@v2
+      #   with:
+      #     python-version: 3
+      # - name: install
+      #   run: |
+      #     pip install boto3
+      # - name: run
+      #   run: |
+      #     python .github/workflows/create_ec2.py

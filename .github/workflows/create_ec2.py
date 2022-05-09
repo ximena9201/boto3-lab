@@ -29,6 +29,13 @@ instances = EC2_RESOURCE.create_instances(
     InstanceType='t2.micro',
     KeyName=KEY_PAIR_NAME,
     UserData=USER_DATA,
+    NetworkInterfaces = [
+    {
+        'SubnetId': subnet_id,
+        'DeviceIndex': 0,
+        'AssociatePublicIpAddress': True,
+        'Groups': [sg1, sg2]
+    }
     TagSpecifications=[
         {
             'ResourceType': 'instance',
@@ -41,6 +48,8 @@ instances = EC2_RESOURCE.create_instances(
         },
     ]
 )
+
+]
 
 for instance in instances:
     print(f'EC2 instance "{instance.id}" has been launched')
